@@ -46,10 +46,10 @@ class AuthRepository {
     final response = await _apiClient.post(
       ApiConstant.registerContractor,
       body: {
-        'username': username,
+        'userame': username, 
         'email': email,
         'password': password,
-        'is_self_employed': isSelfEmployed,
+        'selfEmployed': isSelfEmployed,
       },
       withAuth: false,
     );
@@ -61,13 +61,13 @@ class AuthRepository {
   }
 
   Future<AuthTokenModel> login({
-    required String username,
+    required String email,
     required String password,
   }) async {
     final response = await _apiClient.post(
       ApiConstant.login,
       body: {
-        'username': username,
+        'email': email,
         'password': password,
       },
       withAuth: false,

@@ -12,7 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _obscurePassword = true;
@@ -31,16 +31,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
   Future<void> _signIn() async {
-    final username = _usernameController.text.trim();
+    final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (username.isEmpty || password.isEmpty) {
+    if (email.isEmpty || password.isEmpty) {
       setState(() => _errorMessage = 'Заполните все поля');
       return;
     }
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       await _authRepository.login(
-        username: username,
+        email: email,
         password: password,
       );
 
@@ -62,6 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } on AuthException catch (e) {
       setState(() => _errorMessage = e.message);
     } catch (e) {
+      print('Вот ошибка : $e');
       setState(() => _errorMessage = 'Ошибка соединения. Проверьте интернет.');
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -148,15 +149,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 32),
 
                   const Text(
-                    'Username',
+                    'Email',
                     style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 8),
                   TextField(
-                    controller: _usernameController,
+                    controller: _emailController,
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
-                    decoration: _inputDecoration('Enter your username'),
+                    decoration: _inputDecoration('Enter your Email'),
                   ),
 
                   const SizedBox(height: 20),

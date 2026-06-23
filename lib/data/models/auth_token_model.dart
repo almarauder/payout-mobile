@@ -8,9 +8,16 @@ class AuthTokenModel {
   });
 
   factory AuthTokenModel.fromJson(Map<String, dynamic> json) {
+    final accessToken = json['accessToken'];
+    
+    final refreshToken = json['refreshToken'] ?? json['refresh_token'] ?? '';
+    if (accessToken == null) {
+      throw Exception('Ошибка: в ответе нет accessToken. Ответ сервера: $json');
+    }
+
     return AuthTokenModel(
-      access: json['access'] as String,
-      refresh: json['refresh'] as String,
+      access: accessToken.toString(),
+      refresh: refreshToken.toString(),
     );
   }
 

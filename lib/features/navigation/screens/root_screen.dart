@@ -15,7 +15,6 @@ class _RootScreenState extends State<RootScreen> {
     const HomeScreen(),
     const Center(child: Text('Something #1')),
     const Center(child: Text('Something #2')),
-    const Center(child: Text('Something #3')),
   ];
 
   @override
@@ -39,10 +38,9 @@ class _RootScreenState extends State<RootScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                NavItem(index: 0, currentIndex: index, icon: Icons.home_outlined, activeIcon: Icons.home, label: 'Home', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
-                NavItem(index: 1, currentIndex: index, icon: Icons.qr_code_scanner, activeIcon: Icons.qr_code_scanner, label: 'QR', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
-                NavItem(index: 2, currentIndex: index, icon: Icons.chat_bubble_outline, activeIcon: Icons.chat_bubble, label: 'Messages', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
-                NavItem(index: 3, currentIndex: index, icon: Icons.grid_view, activeIcon: Icons.grid_view_rounded, label: 'Services', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
+                NavItem(index: 0, currentIndex: index, icon: Icons.list_alt, activeIcon: Icons.list_alt, label: 'Задачи', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
+                NavItem(index: 1, currentIndex: index, icon: Icons.assignment, activeIcon: Icons.assignment, label: 'Договоры', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
+                NavItem(index: 2, currentIndex: index, icon: Icons.person, activeIcon: Icons.person, label: 'Профиль', selectedColor: AppColors.gradientBottom, unselectedColor: AppColors.gradientMid),
               ],
             ),
           ),
