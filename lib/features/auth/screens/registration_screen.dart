@@ -164,7 +164,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                   const SizedBox(height: 32),
 
-                  // Username
                   const Text('Username',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 8),
@@ -176,7 +175,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Email
                   const Text('Email',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 8),
@@ -189,7 +187,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Password
                   const Text('Password',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 8),
@@ -211,7 +208,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Confirm Password
                   const Text('Confirm Password',
                       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 8),
@@ -234,7 +230,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
                   const SizedBox(height: 20),
 
-                  // Error message
                   if (_errorMessage != null) ...[
                     Container(
                       width: double.infinity,
@@ -252,7 +247,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     const SizedBox(height: 12),
                   ],
 
-                  // Sign Up button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
