@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:payouts_platform/data/models/task_model.dart';
+import 'package:payouts_platform/features/home/presentation/widgets/home_body.dart';
 import '../../../../data/api/api_client.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../services/task_service.dart';
-import '../widgets/task_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -103,27 +103,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             
             const SizedBox(height: 12),
-            Expanded(child: _buildBody()),
+            Expanded(
+              child: HomeBody(
+                isLoading: _isLoading,
+                error: _error,
+                tasks: _visibleTasks, 
+                onRefresh: _loadTasks, 
+              ),
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildBody() {
-    if (_isLoading && _tasks.isEmpty) return const Center(child: CircularProgressIndicator());
-    if (_error != null) return Center(child: Text(_error!, style: const TextStyle(color: Colors.red)));
-    if (_visibleTasks.isEmpty) return const Center(child: Text('Задач нет'));
-
-    return RefreshIndicator(
-      onRefresh: _loadTasks,
-      child: GridView.builder(
-        padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, crossAxisSpacing: 12, mainAxisSpacing: 12, childAspectRatio: 0.85,
-        ),
-        itemCount: _visibleTasks.length,
-        itemBuilder: (context, index) => TaskCard(task: _visibleTasks[index]),
       ),
     );
   }
