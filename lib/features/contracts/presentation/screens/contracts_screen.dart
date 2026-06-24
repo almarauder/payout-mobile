@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:payouts_platform/data/models/task_model.dart';
-import 'package:payouts_platform/features/home/presentation/widgets/home_body.dart';
+import 'package:payouts_platform/features/contracts/presentation/widgets/contracts_sheet.dart';
+import 'package:payouts_platform/features/home/presentation/widgets/task_card.dart';
 import '../../../../data/api/api_client.dart';
 import '../../../../services/auth_service.dart';
 import '../../../../services/task_service.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ContractsScreen extends StatefulWidget {
+  const ContractsScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ContractsScreen> createState() => _ContractsScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _ContractsScreenState extends State<ContractsScreen> {
   late final TaskService _service;
   List<TaskModel> _tasks = [];
   bool _isLoading = true;
@@ -57,6 +58,58 @@ class _HomeScreenState extends State<HomeScreen> {
       ? _tasks
       : _tasks.where((t) => t.status == _activeFilter).toList();
 
+  void _showContractDetails(TaskModel task) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => ContractDetailsSheet(task: task),
+    );
+  }
+
+  Widget _buildContent() {
+    if (_isLoading && _tasks.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (_error != null && _tasks.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Text(
+            _error!,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.red),
+          ),
+        ),
+      );
+    }
+
+    final visible = _visibleTasks;
+    if (visible.isEmpty) {
+      return const Center(child: Text('Нет договоров в этой категории'));
+    }
+
+    return RefreshIndicator(
+      onRefresh: _loadTasks,
+      child: ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemCount: visible.length,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) {
+          final task = visible[index];
+          return TaskCard(
+            task: task,
+            onTap: () => _showContractDetails(task),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Задачи', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
+                  const Text('Договоры', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700)),
                   IconButton(
                     onPressed: _isLoading ? null : _loadTasks, 
                     icon: const Icon(Icons.refresh),
@@ -109,12 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 12),
             
             Expanded(
-              child: HomeBody(
-                isLoading: _isLoading,
-                error: _error,
-                tasks: _visibleTasks, 
-                onRefresh: _loadTasks, 
-              ),
+              child: _buildContent(),
             ),
           ],
         ),

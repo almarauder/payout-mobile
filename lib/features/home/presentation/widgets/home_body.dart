@@ -7,6 +7,7 @@ class HomeBody extends StatelessWidget {
   final String? error;
   final List<TaskModel> tasks;
   final RefreshCallback onRefresh;
+  final ValueChanged<TaskModel>? onTaskTap;
 
   const HomeBody({
     super.key,
@@ -14,6 +15,7 @@ class HomeBody extends StatelessWidget {
     required this.error,
     required this.tasks,
     required this.onRefresh,
+    this.onTaskTap, 
   });
 
   @override
@@ -41,16 +43,17 @@ class HomeBody extends StatelessWidget {
 
     return RefreshIndicator(
       onRefresh: onRefresh,
-      child: GridView.builder(
+      child: ListView.separated(
         padding: const EdgeInsets.all(16),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12,
-          childAspectRatio: 0.85,
-        ),
         itemCount: tasks.length,
-        itemBuilder: (context, index) => TaskCard(task: tasks[index]),
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (context, index) {
+          final task = tasks[index];
+          return TaskCard(
+            task: task,
+            onTap: () => onTaskTap?.call(task), 
+          );
+        },
       ),
     );
   }

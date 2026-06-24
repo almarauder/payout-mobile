@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payouts_platform/core/theme/app_colors.dart';
+import 'package:payouts_platform/features/contracts/presentation/screens/contracts_screen.dart';
 import 'package:payouts_platform/features/home/presentation/screens/home_screen.dart';
 import 'package:payouts_platform/features/navigation/cubit/bottom_cubit.dart';
 import 'package:payouts_platform/features/navigation/widgets/nav_item.dart';
+import 'package:payouts_platform/features/profile/presentation/profile_screen.dart';
 
 class RootScreen extends StatefulWidget {
   @override
@@ -13,8 +15,8 @@ class RootScreen extends StatefulWidget {
 class _RootScreenState extends State<RootScreen> {
   final List<Widget> _pages = [
     const HomeScreen(),
-    const Center(child: Text('Something #1')),
-    const Center(child: Text('Something #2')),
+    const ContractsScreen(),
+    const ProfileScreen(),
   ];
 
   @override

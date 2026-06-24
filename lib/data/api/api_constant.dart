@@ -1,7 +1,7 @@
 class ApiConstant {
   static const String baseUrl = 'https://modular-payroll-production.up.railway.app/api';
 
-  // Auth (Убрали слэши в конце)
+  // Auth 
   static const String register = '$baseUrl/auth/register';
   static const String login = '$baseUrl/auth/login';
   static const String me = '$baseUrl/auth/me';

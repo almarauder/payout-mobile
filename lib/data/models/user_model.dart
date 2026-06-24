@@ -18,11 +18,11 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'] as int,
-      username: json['username'] as String,
-      email: json['email'] as String,
-      role: json['role'] as String,
+      username: (json['username'] as String?) ?? '',
+      email: (json['email'] as String?) ?? '',
+      role: (json['role'] as String?) ?? '',
       company: json['company'] as int?,
-      isSelfEmployed: json['is_self_employed'] as bool,
+      isSelfEmployed: (json['is_self_employed'] as bool?) ?? false,
     );
   }
 
