@@ -115,18 +115,11 @@ class _ProfileCard extends StatelessWidget {
           ),
 
           const _Divider(),
-
-          // ── Username ──
-          _FieldBlock(label: 'Username', value: user.username),
         ],
       ),
     );
   }
 }
-
-// ──────────────────────────────────────────────
-// Field block: label + bold value
-// ──────────────────────────────────────────────
 
 class _FieldBlock extends StatelessWidget {
   final String label;
@@ -161,10 +154,6 @@ class _FieldBlock extends StatelessWidget {
     );
   }
 }
-
-// ──────────────────────────────────────────────
-// Role badge
-// ──────────────────────────────────────────────
 
 class _RoleBadge extends StatelessWidget {
   final String role;
@@ -227,10 +216,6 @@ class _RoleConfig {
   });
 }
 
-// ──────────────────────────────────────────────
-// Thin divider between fields
-// ──────────────────────────────────────────────
-
 class _Divider extends StatelessWidget {
   const _Divider();
 
@@ -243,10 +228,6 @@ class _Divider extends StatelessWidget {
     );
   }
 }
-
-// ──────────────────────────────────────────────
-// Loading skeleton
-// ──────────────────────────────────────────────
 
 class _LoadingCard extends StatelessWidget {
   const _LoadingCard();
@@ -309,10 +290,6 @@ class _SkeletonBlock extends StatelessWidget {
     );
   }
 }
-
-// ──────────────────────────────────────────────
-// Error state
-// ──────────────────────────────────────────────
 
 class _ErrorCard extends StatelessWidget {
   final String error;
